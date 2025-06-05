@@ -4,17 +4,11 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 import ViewSpending from "@/components/ViewSpending";
 import type { Spending } from "@/types";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import dayjs from "dayjs";
 
 export default function ViewPage() {
   const [spendingList, setSpendingList] = useState<Spending[]>([]);
-  const [activeTab, setActiveTab] = useState<"all" | "month">("all");
-  const [selectedMonth, setSelectedMonth] = useState(dayjs()); // default: current month
-  const [isPickerOpen, setIsPickerOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState<"all" | "chart">("all");
 
-  // Fetch spendings on mount
   useEffect(() => {
     const fetchSpendings = async () => {
       const { data, error } = await supabase
@@ -29,7 +23,6 @@ export default function ViewPage() {
 
     fetchSpendings();
 
-    // ✅ Set up real-time listener
     const subscription = supabase
       .channel("realtime-spendings")
       .on(
@@ -46,13 +39,11 @@ export default function ViewPage() {
       )
       .subscribe();
 
-    // Cleanup on unmount
     return () => {
       supabase.removeChannel(subscription);
     };
   }, []);
 
-  // ✅ Delete spending
   const deleteSpending = async (id: string) => {
     const { error } = await supabase.from("spendings").delete().eq("id", id);
     if (error) {
@@ -62,7 +53,6 @@ export default function ViewPage() {
     setSpendingList((prev) => prev.filter((item) => item.id !== id));
   };
 
-  // ✅ Update spending
   const updateSpending = async (item: Spending) => {
     const { error } = await supabase
       .from("spendings")
@@ -90,7 +80,7 @@ export default function ViewPage() {
         View Spendings 📊
       </h1>
 
-      {/* 🔹 INSERT THE TABS BUTTONS HERE */}
+      {/* 🔹 Tabs */}
       <div className="flex justify-center mb-4 gap-4">
         <button
           onClick={() => setActiveTab("all")}
@@ -103,18 +93,18 @@ export default function ViewPage() {
           View All
         </button>
         <button
-          onClick={() => setActiveTab("month")}
+          onClick={() => setActiveTab("chart")}
           className={`px-4 py-2 rounded-full text-sm font-medium ${
-            activeTab === "month"
+            activeTab === "chart"
               ? "bg-blue-500 text-white"
               : "bg-gray-200 text-gray-700"
           }`}
         >
-          View by Month
+          View Chart 📈
         </button>
       </div>
 
-      {/* 🔹 CONDITIONAL DISPLAY */}
+      {/* 🔹 Tab content */}
       {activeTab === "all" && (
         <ViewSpending
           spending={spendingList}
@@ -123,42 +113,10 @@ export default function ViewPage() {
         />
       )}
 
-      {activeTab === "month" && (
-        <>
-          {/* 🟦 Month Bubble */}
-          <div className="flex justify-center mb-4">
-            <button
-              onClick={() => setIsPickerOpen((prev) => !prev)}
-              className="bg-blue-100 text-blue-700 px-4 py-2 rounded-full shadow text-sm hover:bg-blue-200 transition"
-            >
-              {selectedMonth.format("MMMM YYYY")}
-            </button>
-          </div>
-
-          {/* 📅 Date Picker */}
-          {isPickerOpen && (
-            <div className="flex justify-center mb-6">
-              <DatePicker
-                selected={selectedMonth.toDate()}
-                onChange={(date) => {
-                  setSelectedMonth(dayjs(date));
-                  setIsPickerOpen(false);
-                }}
-                dateFormat="MMMM yyyy"
-                showMonthYearPicker
-                showFullMonthYearPicker
-                className="border p-2 rounded-lg text-center text-blue-700 font-medium shadow-sm w-[150px] cursor-pointer"
-              />
-            </div>
-          )}
-          
-          {/* Filtered spendings by selectedMonth */}
-          <ViewSpending
-            spending={spendingList.filter((item) =>
-              dayjs(item.date).isSame(selectedMonth, "month")
-            )}
-          />
-        </>
+      {activeTab === "chart" && (
+        <div className="text-center text-gray-500 mt-8">
+          🚧 Chart coming soon! Get ready for some cool visual insights 🎉
+        </div>
       )}
     </div>
   );
