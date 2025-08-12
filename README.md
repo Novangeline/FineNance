@@ -33,6 +33,36 @@ It's funny that the reason I started this project is because I don't know where 
 - [ ] Monthly spending report generator (PDF or export)  
 - [ ] PWA support for offline use  
 
+## ⚙️ Settings Features
+
+### 🌗 Theme Toggle
+- Switch between Light mode and Dark mode.
+
+### 📊 Chart Type Preference
+- Choose between:
+  - 📈 Line Chart
+  - 📊 Bar Chart
+
+---
+
+### 💡 Optional Future Ideas
+
+#### 📅 Default View
+- Select default landing page:
+  - View All
+  - View by Month
+  - View by Year
+
+#### 🔔 Spending Threshold Alerts
+- Get notified when monthly spending exceeds a user-defined threshold.
+
+#### 🗂 Category Customization
+- Add, rename, or hide spending categories.
+
+#### 🌍 Currency Preference
+- Choose display currency (e.g. AUD, IDR, etc.)
+
+
 ## ✨ Optional Animations (Polish & Delight)
 
 Add subtle and delightful transitions to elevate the UX of FineNance:
