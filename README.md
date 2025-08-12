@@ -86,3 +86,83 @@ Add subtle and delightful transitions to elevate the UX of FineNance:
 - `react-transition-group` (optional, alternative)
 
 > Implementing these is optional but highly recommended for premium UX polish.
+
+# (NEW) 💅 Girl Math Mode™
+
+Let’s make budgeting *fun* and *fabulous*.
+
+## 🧠 Core Idea
+Let users mark certain expenses as **Smart Buys** (aka *Girl Math* approved) — then justify why it’s actually a great deal. Big purchase? Break it down by cost per use. Returned another item? This one is technically free 😌
+
+---
+
+## 💡 Feature Overview
+
+### 1. Toggle: Girl Math Mode
+- Enable/disable in **Settings**
+- When enabled, each spending item gets a `💁 Justify` button
+
+---
+
+### 2. Justification Modal
+When `💁 Justify` is clicked:
+- Input fields:
+  - 🧾 Cost of item
+  - ⏳ Estimated years of use
+  - 🔁 Optional: times used per week
+- Result:
+  - 💸 Cost per wear
+  - ✨ Fun, sassy summary like:
+    > "$100 jeans? Girl, that's $0.64 per wear over 3 years. Practically free."
+
+---
+
+### 3. Save Justifications
+- Store values in Supabase:
+  - cost
+  - years of use
+  - uses per week (optional)
+  - calculated cost per use
+  - user comment (optional)
+- Add toggleable "Smart Buy 💅" badge
+
+---
+
+### 4. Visual Flair
+- Badge next to justified spendings: `💅 Smart Buy`
+- Optional sparkles ✨ or custom styles
+- Filter: *Show all Smart Buys*
+
+---
+
+## 🛠 Optional Enhancements
+
+- **AI Auto Justify**
+  - Use ChatGPT to generate logic like:
+    > “You skipped coffee 3 times this week. Boom — this dress paid for itself.”
+
+- **Custom Labels**
+  - “Revenge Purchase”  
+  - “It Was On Sale!!”  
+  - “I Deserved It”  
+
+---
+
+## ✨ What to Call It?
+- Girl Math Mode
+- Smart Spending
+- Sassy Justify
+- **Cost Per Slay™** 💀💖
+
+---
+
+## ✅ MVP Checklist
+- [ ] Add toggle to enable Girl Math Mode
+- [ ] Add `💁 Justify` button per spending
+- [ ] Modal for user input + calculation
+- [ ] Store justification in Supabase
+- [ ] Show badge on justified spendings
+
+---
+
+> Powered by ✨ logic, ✨ confidence, and ✨ a little delusion.
